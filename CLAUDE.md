@@ -68,10 +68,16 @@ cards, Custom and Sync tabs.
 - **Setup, installs, tooling, config:** help freely, but explain what each command
   does and what each generated file is for.
 - **Feature code:** do NOT write it unless the user explicitly asks.
-- **When the user is stuck**, escalate in this order:
+- **Teaching new concepts:** explain directly rather than sending the user off to
+  search. Use small, generic examples (not the user's actual feature code) and
+  include a link to the relevant docs (MDN, javascript.info, Vite docs) for depth.
+  The user applies the concept to their own code.
+- **When the user is stuck on their own code**, escalate in this order:
   1. Give a hint.
-  2. Point to docs (MDN, javascript.info).
-  3. Only then show code.
+  2. Point to the specific concept/docs that apply.
+  3. Only then show the code.
+- **Pace:** the user knows programming basics (indexing, loops, fields, etc.) —
+  skip those and focus on what's new about front-end / JS / TS.
 - **Before the user builds a feature**, ask how they would approach it.
 - **Code review:** review what the user writes and explain *why* something is
   wrong. Let them make the fixes; don't edit their feature code for them.
