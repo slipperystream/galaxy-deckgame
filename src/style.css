@@ -1,0 +1,81 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: lightgrey;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+}
+
+/* * {
+  outline: 1px solid red;
+} */
+
+#tabs, #shop {
+  display: flex;
+  justify-content: center; 
+}
+
+#tabs {
+  height: 10vh;
+}
+
+#shop {
+  height: 30vh;
+}
+
+.card {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.card img {
+  height: min(30vh, 45vw);
+  transition: transform cubic-bezier(0.6, 0, 1, 1) 120ms;
+}
+
+.card:hover img{
+  transform: scale(1.015) translateY(-0.8vh);
+  transition: transform cubic-bezier(0, 3, 1, 0.6) 200ms;
+  animation: pulse 2300ms ease-in-out infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% { filter: brightness(1) saturate(1); }
+  12% { filter: brightness(1) saturate(1); }
+  18% { filter: brightness(0.97) saturate(0.97); }
+  20% { filter: brightness(0.95) saturate(0.95); }
+  25% { filter: brightness(1.18) saturate(1.01); }
+  40% { filter: brightness(1.13) saturate(1.03); }
+  75% { filter: brightness(1.05) saturate(1); }
+  100% { filter: brightness(1) saturate(1); }
+}
+
+#info {
+  flex: 1;
+  min-height: 0;
+}
+
+#deck {
+  --card-h: min(15vh, 21vw);
+  height: 30vh;
+  display: grid;
+  grid-template-columns: repeat(6, calc(var(--card-h) * 0.72));
+  grid-template-rows: repeat(2, var(--card-h));
+  justify-content: center;
+}
+
+#deck .card img {
+  height: var(--card-h);
+}
+
+#types {
+  height: 10vh;
+}

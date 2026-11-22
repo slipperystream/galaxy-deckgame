@@ -25,8 +25,12 @@ const randShop = (shopSize: number) => {
 const drawShop = (shopCards: Card[]) => {
   shop.replaceChildren()
   for(const card of shopCards){
-    const el = document.createElement('div')
-    el.textContent = card.name
+    const el = document.createElement('button')
+    el.classList.add('card')
+    const img = document.createElement('img')
+    img.src = card.image
+    img.alt = card.name
+    el.append(img)
     el.addEventListener('click', () => {
       deckCards.push(cardsCopy.splice(cardsCopy.indexOf(card), 1)[0])
       drawDeck()
@@ -41,8 +45,12 @@ const drawDeck = () => {
   deck.replaceChildren()
   const deckCardsSorted = deckCards.toSorted((a,b) => a.name.localeCompare(b.name))
   for (const card of deckCardsSorted) {
-    const el = document.createElement('div')
-    el.textContent = card.name
+    const el = document.createElement('button')
+    el.classList.add('card')
+    const img = document.createElement('img')
+    img.src = card.image
+    img.alt = card.name
+    el.append(img)
     deck.append(el)
   }
 }
