@@ -10,7 +10,7 @@
 
 body {
   background-color: black;
-  color: rgb(238, 238, 238);
+  color: white;
   height: 100dvh;
   overflow: hidden;
   display: flex;
@@ -95,33 +95,36 @@ body {
   font-size: calc(var(--card-h) * 0.15);
   justify-content: center;
   text-align: center;
-  animation: infoPop 200ms ease-out;
+  animation: infoPop 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @keyframes infoPop {
-  0% { transform: translateY(-0.8vh); filter:blur(1px) opacity(0.8);}
-  20% { transform: translateY(-0.3vh); filter:blur(0.05px) opacity(1);}
+  0% { transform: translateY(-0.7vh); filter:blur(0.6px) opacity(0.7);}
   100% { transform: translateY(0vh); filter:blur(0px) opacity(1);}
 }
 
 
-.keyword, .name, .rarity {
+.keyword, .rarity, .name, .stat {
   font-weight: bold;
 }
-.keyword {
+.keyword, .name {
   color: #29eeee;
 }
-.name {
-  color: #4797ff;
+.stat { 
+  color: #6d77ff;
 }
+.name { 
+  color: #ff20ad;
+}
+
 .rarity-common {
-  color: #b9cfff;
+  color: #9ab2e6;
 }
 .rarity-uncommon {
-  color: #2ce444;
+  color: #4de22f;
 }
 .rarity-rare {
-  color: #15a9ff;
+  color: #069afd;
 }
 .rarity-epic {
   color: #b735f3;
@@ -136,7 +139,7 @@ body {
   color: #df1e1e;
 }
 .rarity-yellow {
-  color: #f0c51c;
+  color: #ffd21c;
 }
 .rarity-blue {
   color: #2383ff;
@@ -159,7 +162,7 @@ body {
   background-color: rgb(180, 40, 157);
 }
 .type-pirate {
-  background-color: rgb(146, 37, 17);
+  background-color: rgb(153, 28, 24);
 }
 .type-hero {
   color: black;
@@ -179,10 +182,11 @@ body {
   background-color: rgb(209, 133, 177);
 }
 .type-dragon {
-  background-color: rgb(187, 92, 2);
+  background-color: rgb(201, 97, 12);
 }
 .type-mage {
-  background-color: rgb(48, 7, 194);
+  background-color: rgb(77, 29, 211);
 }
+
 
 

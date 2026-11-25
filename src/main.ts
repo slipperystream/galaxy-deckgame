@@ -2,7 +2,7 @@ import './style.css'
 import cards from './cards.json'
 type Card = (typeof cards)[number]
 type Piece = {text: string, className: string | null}
-type Rule = {terms: string[], className: string, perTerm?: boolean}
+type Rule = {terms?: string[], patterns?: RegExp[], className: string, perTerm?: boolean}
 type Match = {start: number, end: number, text: string, className: string}
 
 const KEYWORDS = [
@@ -16,11 +16,17 @@ const TYPES = [
   'Pirate', 'Fae', 'Dragon', 'Hero', 'Villain', 
   'Animal', 'Mage', 'Toy', 'All', 'Celestial'
 ]
+const STATS = [
+  /\+\d+\/\+\d+/g,
+  /\+\d+/g,
+  /\d+\/\d+/g,
+]
 const NAMES = cards.map(card => card.name)
 
 const rules: Rule[] = [
   { terms: NAMES, className: 'name' },
   { terms: KEYWORDS, className: 'keyword' },
+  { patterns: STATS, className: 'stat' },
   { terms: RARITIES, className: 'rarity', perTerm: true },
   { terms: TYPES, className: 'type', perTerm: true }
 ]
@@ -100,16 +106,27 @@ const drawDeck = () => {
 
 const scanRule = (text: string, rule: Rule): Match[] => {
   const matches: Match[] = []
-  for (const term of rule.terms) {
-    const pattern = new RegExp(`\\b${term}(es|s)?\\b`, 'g')
+  const toScan: { pattern: RegExp, className: string }[] = []
+
+  // setting up patterns for patterns vs terms
+  for (const pattern of rule.patterns ?? []) {
+    toScan.push({ pattern: new RegExp(pattern), className: rule.className })
+  }
+  for (const term of rule.terms ?? []) {
+    const pattern = new RegExp(`\\b${term}(es|s)?( \\d+)?\\b`, 'g')
+    toScan.push({ 
+      pattern, className: rule.perTerm 
+      ? `${rule.className} ${rule.className}-${term.toLowerCase()}` 
+      : rule.className })
+  }
+
+  for (const { pattern, className } of toScan) {
     for (const m of text.matchAll(pattern)) {
       matches.push({
-        start: m.index,
+        start: m.index!,
         end: m.index! + m[0].length,
         text: m[0],
-        className: rule.perTerm
-          ? `${rule.className} ${rule.className}-${term.toLowerCase()}`
-          : rule.className,
+        className,
       })
     }
   }
@@ -143,7 +160,6 @@ const colorText = (text: string): Piece[] => {
   }
   return pieces
 }
-
 
 const drawCardInfo = (card: Card | null) => {
   info.replaceChildren()
